@@ -22,39 +22,54 @@ public class Main {
                 case 1 :
                     System.out.println("How many Days ? ");
                     int days = in.nextInt();
-                    v = new Car(days);
+
                     //عرض البيانات للسيارة
-                    availableVehicles = setAvailableVehicles(AVAILABLE_VEHICLES,"\\cars.txt");//جبتها من الفايل
+                    availableVehicles = setAvailableVehicles(AVAILABLE_VEHICLES,"\\cars.txt",days);//جبتها من الفايل
+
                     System.out.println("Enter the number of Car Model you want : ");
                     int modelNumber = printArrayList(availableVehicles);//هنا تعرض الأجهزه كلها بالاضافه الى انك تجيب اختيار اليوزر
+
                     availableVehicles = UpdateRentalFile(modelNumber,availableVehicles);
+
+
                     UpdateVehicleFile(availableVehicles,"\\cars.txt");
+
+
                     break;
 
                 case 2 :
                     System.out.println("How many hours ? ");
                     int hours = in.nextInt();
-                    v = new Bike(hours);
-//                    in.nextLine(); // Consume the leftover newline
+
                     //عرض البيانات الدراجه
-                    availableVehicles = setAvailableVehicles(AVAILABLE_VEHICLES,"\\bikes.txt");//جبتها من الفايل
+                    availableVehicles = setAvailableVehicles(AVAILABLE_VEHICLES,"\\bikes.txt",hours);//جبتها من الفايل
+
                     System.out.println("Enter the number of Bike brand you want : ");
                     int brandNumber = printArrayList(availableVehicles);//هنا تعرض الأجهزه كلها بالاضافه الى انك تجيب اختيار اليوزر
+
                     availableVehicles = UpdateRentalFile(brandNumber,availableVehicles);
+
                     UpdateVehicleFile(availableVehicles,"\\bikes.txt");
+
+
                     break;
 
                 case 3 :
                     System.out.println("How many weeks ? ");
                     int weeks = in.nextInt();
-                    v = new Truck(weeks);
-//                    in.nextLine(); // Consume the leftover newline
+
                     //عرض البيانات الشاحنة
-                    availableVehicles = setAvailableVehicles(AVAILABLE_VEHICLES,"\\trucks.txt");//جبتها من الفايل
+                    availableVehicles = setAvailableVehicles(AVAILABLE_VEHICLES,"\\trucks.txt",weeks);//جبتها من الفايل
+
+
                     System.out.println("Enter the number of Truck type you want : ");
                     int typeNumber = printArrayList(availableVehicles);//هنا تعرض الأجهزه كلها بالاضافه الى انك تجيب اختيار اليوزر
+
+
                     availableVehicles = UpdateRentalFile(typeNumber,availableVehicles);
                     UpdateVehicleFile(availableVehicles,"\\trucks.txt");
+
+
                     break;
 
                 case 4 :
@@ -100,7 +115,7 @@ public class Main {
         }
     }
 
-    public static ArrayList<Vehicle> setAvailableVehicles(String parentPath, String branchPath){
+    public static ArrayList<Vehicle> setAvailableVehicles(String parentPath, String branchPath,int duration){
 
 
 
@@ -118,16 +133,16 @@ public class Main {
 
             if(branchPath.equals("\\cars.txt")){
                 while(reader.hasNext()){
-                    String firstVehicle = reader.next();
-                    Vehicle v = new Car(firstVehicle);
+                    String firstVehicle = reader.nextLine();
+                    Vehicle v = new Car(firstVehicle,duration);
                     vehicles.add(v);
                 }
 
 
             } else if (branchPath.equals("\\bikes.txt")) {
                 while(reader.hasNext()){
-                    String firstVehicle = reader.next();
-                    Vehicle v = new Bike(firstVehicle);
+                    String firstVehicle = reader.nextLine();
+                    Vehicle v = new Bike(firstVehicle,duration);
                     vehicles.add(v);
                 }
 
@@ -135,8 +150,8 @@ public class Main {
 
             }else{//trucks path
                 while(reader.hasNext()){
-                    String firstVehicle = reader.next();
-                    Vehicle v = new Truck(firstVehicle);
+                    String firstVehicle = reader.nextLine();
+                    Vehicle v = new Truck(firstVehicle,duration);
                     vehicles.add(v);
                 }
             }

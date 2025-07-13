@@ -1,0 +1,3 @@
+
+Car Rental Details : "{model='Toyota-Corolla', days=0}
+Truck Details :{type='Ford-F-150', week=0}

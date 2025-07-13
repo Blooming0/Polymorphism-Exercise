@@ -1,0 +1,10 @@
+Ford-F-150
+Chevrolet-Silverado1500
+RAM-1500
+Toyota-Tundra
+Nissan-Titan
+GMC-Sierra1500
+Ford-Ranger
+Isuzu-D-Max
+Mitsubishi-L200
+Hino-500Series

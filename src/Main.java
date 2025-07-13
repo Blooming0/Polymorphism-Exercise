@@ -7,12 +7,12 @@ public class Main {
     public static void main(String[] args) {
         final String AVAILABLE_VEHICLES = "C:\\Users\\LENOVO\\Desktop\\Exercises&Labs\\Polymorphism-Exercise\\src\\vehicles\\available-vehiles";
 
-        ArrayList<Vehicle> rentedVehicles = new ArrayList<>();
-        ArrayList<Vehicle> availableVehicles = new ArrayList<>();
+        ArrayList<Vehicle> availableVehicles;
 
         Scanner in = new Scanner(System.in);
-
         int userSelect = 0;
+
+
         while(userSelect != 5){
             menu_Driven_Interface();
             System.out.println("Enter your choice : ");
@@ -23,15 +23,13 @@ public class Main {
                     System.out.println("How many Days ? ");
                     int days = in.nextInt();
                     v = new Car(days);
-//                    in.nextLine(); // Consume the leftover newline
                     //عرض البيانات للسيارة
                     availableVehicles = setAvailableVehicles(AVAILABLE_VEHICLES,"\\cars.txt");//جبتها من الفايل
                     System.out.println("Enter the number of Car Model you want : ");
                     int modelNumber = printArrayList(availableVehicles);//هنا تعرض الأجهزه كلها بالاضافه الى انك تجيب اختيار اليوزر
                     availableVehicles = UpdateRentalFile(modelNumber,availableVehicles);
-                    UpdateVehicleFile(availableVehicles,"cars.txt");
+                    UpdateVehicleFile(availableVehicles,"\\cars.txt");
                     break;
-
 
                 case 2 :
                     System.out.println("How many hours ? ");
@@ -43,8 +41,9 @@ public class Main {
                     System.out.println("Enter the number of Bike brand you want : ");
                     int brandNumber = printArrayList(availableVehicles);//هنا تعرض الأجهزه كلها بالاضافه الى انك تجيب اختيار اليوزر
                     availableVehicles = UpdateRentalFile(brandNumber,availableVehicles);
-                    UpdateVehicleFile(availableVehicles,"bikes.txt");
+                    UpdateVehicleFile(availableVehicles,"\\bikes.txt");
                     break;
+
                 case 3 :
                     System.out.println("How many weeks ? ");
                     int weeks = in.nextInt();
@@ -55,11 +54,13 @@ public class Main {
                     System.out.println("Enter the number of Truck type you want : ");
                     int typeNumber = printArrayList(availableVehicles);//هنا تعرض الأجهزه كلها بالاضافه الى انك تجيب اختيار اليوزر
                     availableVehicles = UpdateRentalFile(typeNumber,availableVehicles);
-                    UpdateVehicleFile(availableVehicles,"trucks.txt");
+                    UpdateVehicleFile(availableVehicles,"\\trucks.txt");
                     break;
+
                 case 4 :
                     rentedVehicles();
                     break;
+
                 case 5 :
                     System.out.println("Thank you for using the Vehicle Rental System!");
             }
@@ -100,25 +101,38 @@ public class Main {
     }
 
     public static ArrayList<Vehicle> setAvailableVehicles(String parentPath, String branchPath){
+
+
+
             ArrayList<Vehicle> vehicles = new ArrayList<>();
+
             String wholePath = parentPath + branchPath;
 
             File file = new File(wholePath);
 
+
             try{
                 Scanner reader = new Scanner(file);
+
+
+
             if(branchPath.equals("\\cars.txt")){
                 while(reader.hasNext()){
                     String firstVehicle = reader.next();
                     Vehicle v = new Car(firstVehicle);
                     vehicles.add(v);
                 }
+
+
             } else if (branchPath.equals("\\bikes.txt")) {
                 while(reader.hasNext()){
                     String firstVehicle = reader.next();
                     Vehicle v = new Bike(firstVehicle);
                     vehicles.add(v);
                 }
+
+
+
             }else{//trucks path
                 while(reader.hasNext()){
                     String firstVehicle = reader.next();
@@ -126,6 +140,8 @@ public class Main {
                     vehicles.add(v);
                 }
             }
+
+
                 reader.close();//close the Scanner Reader
             }catch (FileNotFoundException e){
                 System.out.println(e.getMessage());
